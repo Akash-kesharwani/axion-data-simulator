@@ -1,0 +1,47 @@
+name: "Docker build and push"
+
+on: 
+  push:
+    branches:
+    - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  docker-build-push:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: axion-ui
+      IMAGE_TAG: v1
+      ACR_NAME: akacr1212134
+      ACR_LOGIN_SERVER: akacr1212134.azurecr.io
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+
+    - name: Azure Login
+      uses: Azure/login@v2.3.0
+      with:
+        client-id: 5e4353a7-2799-4bac-b56e-bc5093838760
+        tenant-id: 70215518-e920-4fbb-bce9-8e471101e454
+        subscription-id: fbb258e2-cd4d-4bd2-9c7d-a04b5cf93aaa
+
+    - name: Login to ACR
+      run: |
+        az acr login --name $ACR_NAME
+
+    - name: Build docker image
+      run: |
+        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+
+    - name: Tag image with ACR
+      run: |
+        docker tag $IMAGE_NAME:$IMAGE_TAG $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG
+
+    - name: image push to ACR
+      run: |
+        docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG
