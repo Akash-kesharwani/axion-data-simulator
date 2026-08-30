@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dep-lab
+  template:
+    metadata:
+      labels:
+        app: dep-lab
+    spec:
+      containers:
+      - name: axion-data-simul
+        image: akacr1212134.azurecr.io           
+        ports:
+        - port: 80
+          containePort: 80
+        
+
+

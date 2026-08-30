@@ -19,14 +19,16 @@ jobs:
       ACR_NAME: akacr1212134
       ACR_LOGIN_SERVER: akacr1212134.azurecr.io
 
+      
     steps:
     - name: Checkout
       uses: actions/checkout@v5.0.0
 
+    
     - name: Azure Login
       uses: Azure/login@v2.3.0
       with:
-        client-id: 5e4353a7-2799-4bac-b56e-bc5093838760
+        client-id: 09feefba-07c4-4621-9e45-67141fc72038
         tenant-id: 70215518-e920-4fbb-bce9-8e471101e454
         subscription-id: fbb258e2-cd4d-4bd2-9c7d-a04b5cf93aaa
 
