@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dep-app
+  name: simulator-dep
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: dep-lab
+      app: simulator-lab
   template:
     metadata:
       labels:
-        app: dep-lab
+        app: simulator-lab
     spec:
       containers:
-      - name: axion-data-simul
-        image: akacr1212134.azurecr.io           
+      - name: axion-data-simulator
+        image: akacr1212134.azurecr.io/axion-data-simulator:v2          
         ports:
-        - port: 80
-          containePort: 80
+        -  containePort: 8000
         
 
 
