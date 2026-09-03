@@ -16,7 +16,7 @@ spec:
       - name: axion-data-simulator
         image: akacr1212134.azurecr.io/axion-data-simulator:v2          
         ports:
-        -  containePort: 8000
+        -  containerPort: 8000
         
 
 
